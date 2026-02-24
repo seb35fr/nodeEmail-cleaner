@@ -1,0 +1,17 @@
+{
+  "name": "node-email-cleaner",
+  "version": "1.0.0",
+  "description": "Clean Mailchimp HTML email exports — remove editor bloat, purge unused CSS, simplify table nesting",
+  "type": "module",
+  "bin": {
+    "email-cleaner": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "node --test test/transforms.test.js",
+    "clean": "node bin/cli.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "commander": "^13.0.0"
+  }
+}
