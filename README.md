@@ -9,7 +9,6 @@ Outil CLI Node.js pour nettoyer les exports HTML Mailchimp. Supprime le code d'e
 ## Installation
 
 ```bash
-cd tools/nodeEmail-cleaner
 npm install
 ```
 
@@ -18,7 +17,7 @@ npm install
 ### Nettoyage basique
 
 ```bash
-node tools/nodeEmail-cleaner/bin/cli.js mon-email.html -o mon-email-clean.html
+node bin/cli.js mon-email.html -o mon-email-clean.html
 ```
 
 Le fichier `mon-email-clean.html` est genere. Sans `-o`, le fichier de sortie sera `mon-email-clean.html` (suffixe `-clean` ajoute automatiquement).
@@ -26,7 +25,7 @@ Le fichier `mon-email-clean.html` est genere. Sans `-o`, le fichier de sortie se
 ### Avec stats detaillees
 
 ```bash
-node tools/nodeEmail-cleaner/bin/cli.js mon-email.html -o mon-email-clean.html -v
+node bin/cli.js mon-email.html -o mon-email-clean.html -v
 ```
 
 Affiche le nombre de lignes, la taille avant/apres, et le detail de chaque transformation :
@@ -64,13 +63,13 @@ Done! mon-email-clean.html
 
 ```bash
 # Largeur personnalisee (600px au lieu de 660)
-node tools/nodeEmail-cleaner/bin/cli.js input.html -o output.html -w 600
+node bin/cli.js input.html -o output.html -w 600
 
 # Sans modification du preheader ni ajout de wrappers Outlook
-node tools/nodeEmail-cleaner/bin/cli.js input.html -o output.html --no-preheader-fix --no-mso-wrappers
+node bin/cli.js input.html -o output.html --no-preheader-fix --no-mso-wrappers
 
 # Nettoyage rapide, sans toucher au CSS
-node tools/nodeEmail-cleaner/bin/cli.js input.html -o output.html --no-css-clean
+node bin/cli.js input.html -o output.html --no-css-clean
 ```
 
 ## Pipeline de transformations
@@ -105,7 +104,7 @@ Les transformations s'executent dans cet ordre :
 2. Placer le fichier dans le dossier du projet
 3. Lancer le nettoyage :
    ```bash
-   node tools/nodeEmail-cleaner/bin/cli.js nouveau-email.html -o nouveau-email-clean.html -v
+   node bin/cli.js nouveau-email.html -o nouveau-email-clean.html -v
    ```
 4. Ouvrir `nouveau-email-clean.html` dans un navigateur et verifier le rendu
 5. Tester dans les clients email cibles (Outlook, Gmail, Apple Mail, mobile)
@@ -113,19 +112,17 @@ Les transformations s'executent dans cet ordre :
 ## Tests
 
 ```bash
-cd tools/nodeEmail-cleaner
-node --test test/transforms.test.js
+npm test
 ```
 
 ## Structure du projet
 
 ```
-tools/nodeEmail-cleaner/
-  bin/cli.js              CLI (point d'entree)
-  src/
-    index.js              API publique : clean(html, options)
-    transforms/           8 modules de transformation
-    utils/html-helpers.js Helpers cheerio reutilisables
-  test/
-    transforms.test.js    Tests unitaires
+bin/cli.js              CLI (point d'entree)
+src/
+  index.js              API publique : clean(html, options)
+  transforms/           8 modules de transformation
+  utils/html-helpers.js Helpers cheerio reutilisables
+test/
+  transforms.test.js    Tests unitaires
 ```
